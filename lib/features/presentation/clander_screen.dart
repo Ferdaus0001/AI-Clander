@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-
 class MyCalendarPage extends StatefulWidget {
   const MyCalendarPage({super.key});
 
@@ -12,6 +11,7 @@ class MyCalendarPage extends StatefulWidget {
 class _MyCalendarPageState extends State<MyCalendarPage> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,16 +73,15 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
                 startingDayOfWeek: StartingDayOfWeek.monday,
                 locale: 'en_US',
                 dayHitTestBehavior: HitTestBehavior.deferToChild,
-                  availableCalendarFormats: const {
-                    CalendarFormat.month: 'Month',
-                    CalendarFormat.twoWeeks: '2 Weeks',
-                    CalendarFormat.week: '1 Week',
-                  },
+                availableCalendarFormats: {
+                  CalendarFormat.month: 'Month',
+                  CalendarFormat.twoWeeks: _weeksLeftInMonthText(),
+                  CalendarFormat.week: '1 Week',
+                },
                 daysOfWeekHeight: 40,
                 daysOfWeekStyle: DaysOfWeekStyle(
                   weekdayStyle: const TextStyle(
                     color: Colors.black87,
-
                     fontWeight: FontWeight.bold,
                   ),
                   weekendStyle: const TextStyle(
@@ -134,10 +133,8 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
                 calendarBuilders: CalendarBuilders(
                   defaultBuilder: (context, day, focusedDay) {
                     if (day.weekday == DateTime.friday) {
-                      //Wednesday – Default Color
                       return null;
                     } else {
-                      // Color of other days
                       return Container(
                         margin: const EdgeInsets.all(6.0),
                         alignment: Alignment.center,
@@ -162,14 +159,17 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
 
   /// 🔁 Helper: Get image based on month
   String getSeasonImage(int month) {
-    if ([12, 1, 2].contains(month)) {
-      return 'assets/image/R.jpg';
-    } else if ([3, 4, 5].contains(month)) {
-      return 'assets/image/R.jpg';
-    } else if ([6, 7, 8].contains(month)) {
-      return 'assets/image/R.jpg';
-    } else {
-      return 'assets/image/R.jpg';
-    }
+    return 'assets/image/R.jpg'; // Static for now
+  }
+
+  /// 🔁 Helper: Get dynamic text for 2 Weeks format
+  String _weeksLeftInMonthText() {
+    DateTime now = DateTime.now();
+    int daysInMonth = DateTime(now.year, now.month + 1, 0).day;
+    int remainingDays = daysInMonth - now.day;
+    int remainingWeeks = (remainingDays / 7).ceil();
+
+    if (remainingWeeks <= 0) return 'Final Week!';
+    return '$remainingWeeks week${remainingWeeks > 1 ? 's' : ''} left';
   }
 }
