@@ -123,7 +123,7 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
                     shape: BoxShape.circle,
                   ),
                   defaultTextStyle: const TextStyle(
-                    color: Colors.black87,
+                    color: Colors.redAccent,
                     fontWeight: FontWeight.w500,
                   ),
                   weekendTextStyle: const TextStyle(
