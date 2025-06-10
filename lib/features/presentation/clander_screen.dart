@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import 'developer/developer_info_screen.dart';
 class MyCalendarPage extends StatefulWidget {
   const MyCalendarPage({super.key});
-
   @override
   _MyCalendarPageState createState() => _MyCalendarPageState();
 }
@@ -40,16 +42,22 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
                 alignment: Alignment.bottomLeft,
                 child: Padding(
                   padding: const EdgeInsets.all(16),
-                  child: Text(
-                    'My Calendar',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
+                  child: InkWell(
+                    onTap: () {
+                      Get.to(const DeveloperInfoScreen());
+                    },
+                    child: Text(
+                      'My Calendar',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-              )
+              ),
+
             ],
           ),
           backgroundColor: Colors.transparent,
@@ -152,6 +160,8 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
               ),
             ),
           ),
+          const SizedBox(height: 64),
+
         ],
       ),
     );

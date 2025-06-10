@@ -2,12 +2,9 @@ import 'package:ai_clander/features/presentation/clander_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:async';
-
 import 'package:shimmer/shimmer.dart';
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
-
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
@@ -63,6 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         Color(0xFF00BCD4), // light blue
                         Colors.purple, // purple
                       ],
+                      stops: [0.0, 1.0],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ).createShader(bounds);
